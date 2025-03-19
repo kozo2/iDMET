@@ -1,26 +1,33 @@
 rm(list=ls(all=TRUE))
 
+url <- "https://github.com/riramatsuta/iDMET/archive/refs/heads/main.zip"
+download.file(url, destfile = "iDMET.zip", mode = "wb")
+unzip("iDMET.zip", exdir = "unzipped_folder")
+
 #----------------
 #  Step 1 
 #----------------
 # metabolite name dicitonary upload
-file <- "./metabodic.csv"
+file <- "./unzipped_folder/iDMET-main/program/metabodic.csv"
 K <- read.csv(file)[,c(1,2)]
 
 # list of csv files (metabolomic data)
 # path <- "./data/csv_set1"       # data set 1
 path <- "./data/csv_set2"         # data set 2
 
+path <- "./unzipped_folder/iDMET-main/dataset 1"
+
 # ----------------------------
 #   matchings
 # ----------------------------
 ALL <- NULL
 k <- 1
+L <- list.files(path = path, recursive = TRUE, full.names = TRUE)
+
 for(i in 1:length(L)){
-   
+
   # csv files
-  file <- paste(path,L[i], sep ="/")
-  D <- read.csv(file, header=TRUE)[-1,] 
+  D <- read.csv(L[i], header=TRUE)[-1,]
   
   # metabolite name
   M <- as.character(D[,1]) 
