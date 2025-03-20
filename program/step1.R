@@ -53,7 +53,7 @@ for(i in 1:length(L)){
   ALL[i] <- list(all)
 }
 
-names(ALL) <- L
+names(ALL) <- basename(L)
 
 # ----------------
 #   data save
